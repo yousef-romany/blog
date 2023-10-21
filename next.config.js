@@ -1,13 +1,16 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+    images: {
+        unoptimized: true,
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'raw.githubusercontent.com',
+            port: '',
+            // pathname: '/account123/**',
+          },
+        ],
+    },
+}
 
-module.exports = nextConfig
-
-// module.exports = {
-//     webpack5: true,
-//     webpack: (config) => {
-//       config.resolve.fallback = { fs: false, path: false, };
-  
-//       return config;
-//     },
-//    };
+module.exports = nextConfig;

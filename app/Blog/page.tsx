@@ -1,10 +1,9 @@
-"use client";
+"use client"
 import { use, useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import imgSocial from "../../public/Images/photo-1523875194681-bedd468c58bf.webp";
 import CardBlog from "@/components/blog/CardBlog";
-
-import { getAllPosts } from "@/lib/posts";
+// import Ul from "@/components/blog/Ul";
 
 
 
@@ -27,95 +26,107 @@ const dataTypeFilters: string[] = [
     "tips"
 ]
 
-interface dataTypeFeaturedTalks { 
-    img: any;
-    header: string;
-    date: string;
-    time: string;
-    filter: string;
-  }
+// interface dataTypeFeaturedTalks { 
+//     img: any;
+//     header: string;
+//     date: string;
+//     time: string;
+//     filter: string;
+//   }
   
-const dataFeaturedTalks: dataTypeFeaturedTalks [] = [
-{
-    img: imgSocial,
-    header: "Chakra, Panda and Ark - What's the plan?",
-    date: "August 26, 2023",
-    time: "4 min read",
-    filter: "chakra"
-},
-{
-    img: imgSocial,
-    header: "Chakra, Panda and Ark - What's the plan?",
-    date: "August 26, 2023",
-    time: "4 min read",
-    filter: "chakra"
-    },
-    {
-    img: imgSocial,
-    header: "Chakra, Panda and Ark - What's the plan?",
-    date: "August 26, 2023",
-    time: "4 min read",
-    filter: "chakra"
-    },
-    {
-    img: imgSocial,
-    header: "Chakra, Panda and Ark - What's the plan?",
-    date: "August 26, 2023",
-    time: "4 min read",
-    filter: "chakra"
-    },
-    {
-    img: imgSocial,
-    header: "Chakra, Panda and Ark - What's the plan?",
-    date: "August 26, 2023",
-    time: "4 min read",
-    filter: "chakra"
-    },
-    {
-    img: imgSocial,
-    header: "Chakra, Panda and Ark - What's the plan?",
-    date: "August 26, 2023",
-    time: "4 min read",
-    filter: "chakra"
-    },
-    {
-    img: imgSocial,
-    header: "Chakra, Panda and Ark - What's the plan?",
-    date: "August 26, 2023",
-    time: "4 min read",
-    filter: "chakra"
-    },    
-    {
-    img: imgSocial,
-    header: "Chakra, Panda and Ark - What's the plan?",
-    date: "August 26, 2023",
-    time: "4 min read",
-    filter: "chakra"
-    },
+// const dataFeaturedTalks: dataTypeFeaturedTalks [] = [
+// {
+//     img: imgSocial,
+//     header: "Chakra, Panda and Ark - What's the plan?",
+//     date: "August 26, 2023",
+//     time: "4 min read",
+//     filter: "chakra"
+// },
+// {
+//     img: imgSocial,
+//     header: "Chakra, Panda and Ark - What's the plan?",
+//     date: "August 26, 2023",
+//     time: "4 min read",
+//     filter: "chakra"
+//     },
+//     {
+//     img: imgSocial,
+//     header: "Chakra, Panda and Ark - What's the plan?",
+//     date: "August 26, 2023",
+//     time: "4 min read",
+//     filter: "chakra"
+//     },
+//     {
+//     img: imgSocial,
+//     header: "Chakra, Panda and Ark - What's the plan?",
+//     date: "August 26, 2023",
+//     time: "4 min read",
+//     filter: "chakra"
+//     },
+//     {
+//     img: imgSocial,
+//     header: "Chakra, Panda and Ark - What's the plan?",
+//     date: "August 26, 2023",
+//     time: "4 min read",
+//     filter: "chakra"
+//     },
+//     {
+//     img: imgSocial,
+//     header: "Chakra, Panda and Ark - What's the plan?",
+//     date: "August 26, 2023",
+//     time: "4 min read",
+//     filter: "chakra"
+//     },
+//     {
+//     img: imgSocial,
+//     header: "Chakra, Panda and Ark - What's the plan?",
+//     date: "August 26, 2023",
+//     time: "4 min read",
+//     filter: "chakra"
+//     },    
+//     {
+//     img: imgSocial,
+//     header: "Chakra, Panda and Ark - What's the plan?",
+//     date: "August 26, 2023",
+//     time: "4 min read",
+//     filter: "chakra"
+//     }
+// ]
 
-]
-async function getData() {
-    return await getAllPosts();
-}
 const Blog = () => {
-
-    let posts: any = use(getData())
-        
     const [filterState, setFilter] = useState<string>("All");
     const [searchInput, setSearchInput] = useState<string>("");
     const [data, setData] = useState<any[]>();
+    const [mainData, setMainData] = useState<any[]>();
+
+    useEffect(() => {
+        fetch("/api/getAll")
+        .then(res => {
+            return res.json()
+        })
+        .then((resData) => {
+            console.log(resData)
+            setMainData(resData)
+            console.log(mainData)
+            setData(resData)
+            console.log(data)
+        }).catch(error => {
+            console.log(error)
+        })
+    }, [])
     
-    // useEffect(() => {setFilter("All"); console.log(data)}, []);
+    // useEffect(() => {setFilter("All");}, []);
     // useEffect(() => {
     //     if (filterState == "All") {
-    //         setData(data2);
+    //         setData(mainData);
+    //         console.log(mainData)
     //     } else {
-    //         let endFilter = dataFeaturedTalks.filter((element) => element.filter == filterState);
+    //         let endFilter = mainData.filter((element) => element.data.tags == filterState);
     //         setData(endFilter);
     //     }
     // }, [filterState]);
     // useEffect(() => {
-    //     let endFilter = dataFeaturedTalks.filter(element => {
+    //     let endFilter = mainData.filter(element => {
     //         return element?.header.toLowerCase().startsWith(searchInput.toLowerCase());
     //     });
     //     setData(endFilter);
@@ -148,12 +159,10 @@ const Blog = () => {
                 </div>
             </div>
             <div className="w-full min-h-screen h-fit flex flex-row flex-wrap justify-start items-start gap-[10px]">
-                 { !posts ? <p>no data</p> : 
-                    posts?.map((post: any, index: number) => (<div key={index}>{post.title}</div>)) } 
-                {/* {data?.length !== 0 ? data?.map(
-                    (item: dataTypeFeaturedTalks, key: number) => (<CardBlog header={item.header} img={item.img} date={item.date} time={item.time} key={key} filter={item.filter} />)
+                {data?.length !== 0 ? data?.map(
+                    (item: any, key: number) => (<CardBlog id={item.data.id} header={item.data.title} img={item.data.img} date={item.data.date} time={item.data.time} key={key} filter={item.filter} />)
                 )
-                    : <p className="text-[#e7e5e4]">No results found that match your query. Sorry</p>} */}
+                    : <p className="text-[#e7e5e4]">No results found that match your query. Sorry</p>}
             </div>
         </main>
     </>;

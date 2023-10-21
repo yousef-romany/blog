@@ -3,7 +3,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import imgSocial from "../../public/Images/photo-1523875194681-bedd468c58bf.webp";
 import CardBlog from "@/components/blog/CardBlog";
 
-import { getAllPosts } from "@/lib/posts";
+// import { getAllPosts } from "@/lib/posts";
 
 
 
@@ -98,9 +98,9 @@ interface dataTypeFeaturedTalks {
 
 const AsyncBlog = async () => {
     
-    const data2: any = use(getData());
+    // const data2: any = use(getData());
 
-    console.log(data2)
+    // console.log(data2)
 
     const [filterState, setFilter] = useState<string>("All");
     const [searchInput, setSearchInput] = useState<string>("");
@@ -148,7 +148,7 @@ const AsyncBlog = async () => {
                 </div>
             </div>
             <div className="w-full min-h-screen h-fit flex flex-row flex-wrap justify-start items-start gap-[10px]">
-                {data2?.map((post: any, index: number) => (<div key={index}>{post.title}</div>))}
+                {/* {data2?.map((post: any, index: number) => (<div key={index}>{post.title}</div>))} */}
                 {/* {data?.length !== 0 ? data?.map(
                     (item: dataTypeFeaturedTalks, key: number) => (<CardBlog header={item.header} img={item.img} date={item.date} time={item.time} key={key} filter={item.filter} />)
                 )
